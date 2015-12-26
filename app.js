@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
-  if(process.env.NODE_ENV !== 'production') {
+  if(process.env.CORS_DOMAIN_NAME) {
     res.header("Access-Control-Allow-Origin", process.env.CORS_DOMAIN_NAME);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   }
