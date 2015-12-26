@@ -18,6 +18,15 @@ router.post('/contact', function(req, res, next) {
   let senderEmail = sanitize(req.body.sender_email);
   let senderMessage = sanitize(req.body.sender_message);
 
+  // add some basic validation
+  if(
+    !validator.isEmail(senderEmail) ||
+    senderName.length === 0 ||
+    senderMessage.length === 0) {
+    res.json({ sent: false, message: 'Invalid paramaters sent.' });
+    return;
+  }
+
   // Setup our Email template
   let messageTemplate =
   `Message Reads: ${senderMessage}
@@ -41,7 +50,7 @@ router.post('/contact', function(req, res, next) {
     function() {
       // Success Action
       res.json({ sent: true });
-    }, 
+    },
     function(e) {
 
       let message = 'A mandrill error occurred: ' + e.name + ' - ' + e.message;
