@@ -1,5 +1,4 @@
 var express = require('express');
-var expressSanitized = require('express-sanitized');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -20,7 +19,6 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(expressSanitized()); 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

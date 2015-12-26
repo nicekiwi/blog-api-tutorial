@@ -1,17 +1,22 @@
 'use strict'
 
+let validator = require('validator');
 let express = require('express');
 let mandrill = require('mandrill-api/mandrill');
 let router = express.Router();
+
+let sanitize = function(input) {
+  return validator.escape(input);
+}
 
 router.post('/contact', function(req, res, next) {
   // Setup Mandrill Client with API KEY
   let mandrillClient = new mandrill.Mandrill(process.env.MANDRILL_API_KEY);
 
-  // Grab our forms values, these have allready been sanitized
-  let senderName = req.body.sender_name;
-  let senderEmail = req.body.sender_email;
-  let senderMessage = req.body.sender_message;
+  // Grab our forms values, and escape them to prevent anything icky
+  let senderName = sanitize(req.body.sender_name);
+  let senderEmail = sanitize(req.body.sender_email);
+  let senderMessage = sanitize(req.body.sender_message);
 
   // Setup our Email template
   let messageTemplate =
