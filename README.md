@@ -1,4 +1,4 @@
-# Blog API Tutorial
+# Blog Contact Form Tutorial
 
 Source code for my tutorial at https://kiwidev.co.nz/setting-up-a-sweet-contact-form-for-ghost-with-heroku-and-nodejs.
 
